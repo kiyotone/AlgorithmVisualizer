@@ -21,10 +21,12 @@ public:
     float deltime;
     sf::Clock clock;
     sf::Event sfEvent;
-    Algorithm frontier;
+    Algorithm alg;
     sf::Vector2i goal_state;
     std::vector<sf::Vector2i> actions;
-  
+    float totalTime = .0f;
+    float switchTIme = 3.0f;
+
     sf::Vector2i initiai_state;
     
 

@@ -20,6 +20,8 @@ public:
 
     Box *box;
 
+    
+
     std::vector<sf::Vector2i> get_actions();
 
 };

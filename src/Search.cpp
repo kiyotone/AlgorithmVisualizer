@@ -9,10 +9,10 @@ Search::Search(){
 
 void Search::init_solve(){
 
-	Node start( sf::Vector2i(0,0),box[0][0]);
-	goal_state = sf::Vector2i(128,128);
-	std::cout<<start.action.x<<' '<<start.action.y<<std::endl;
-	frontier.add(start);
+	Node start( sf::Vector2i(5,5) , box[5][5]);
+	goal_state = sf::Vector2i(23,23);
+	// std::cout<<start.action.x<<' '<<start.action.y<<std::endl;
+	alg.add(start);
 }
 
 void Search::init(){
@@ -63,9 +63,16 @@ void Search::update(){
 
 	updateSFMLevents();
     mouse->update(box, *window);
-    update_boxes();
+	
+	
+        
+	solve();
 
-	// solve();
+
+    
+
+	update_boxes();
+
 }
 
 void Search::update_boxes(){
@@ -135,13 +142,15 @@ void Search::run(){
 
 void Search::solve(){
 
-	if(frontier.empty()){
-		window->close();
+	if(alg.empty()){
+		std::cout<<"Empty"<<std::endl;
+
+		// window->close();
 	}
 	
-	Node node = frontier.remove();
+	Node node = alg.remove();
 	
-	std::cout<<node.action.x<<' '<<node.action.y<<std::endl;
+	std::cout<<"Node  "<<node.state.x<<" "<<node.state.y <<std::endl;	
 
 
 	if (node.state == goal_state){
@@ -152,28 +161,44 @@ void Search::solve(){
 			node = *node.parent;
 			std::cout<< node.box->pos.x <<" "<<node.box->pos.y<<std::endl;
 		}
-		window->close();
+		// window->close();
 		
 	}
-	frontier.explored.push_back(node.state);
+	
+	
 
-	actions = node.get_actions();
+	node.box->animating= true;
+	alg.explored.push_back(node.state);
+	
 
-	for (int x = 0; x< actions.size();x++){
-		if( !frontier.contains_state(actions[x]) and !frontier.inExplored(actions[x])){
-			Box *box_ = box[actions[x].x][actions[x].y];
-			sf::Vector2i act = actions[x];
+	std::cout<<"Explored  "<<alg.explored.size()<<std::endl;
+	
+	std::vector<sf::Vector2i> act =  node.get_actions();
 
-			Node child = Node(act , &node , act , box_ );
-			frontier.add(child);
+
+
+	for (int a = 0; a< act.size();a++){
+		
+		if( !alg.contains_state(act[a]) and !alg.inExplored(act[a])){
+			
+			std::cout<<"Action  "<< act[a].x <<" " <<act[a].y<<std::endl;
+
+			Box *box_ = box[act[a].x][act[a].y];
+			
+			sf::Vector2i action = act[a];
+			
+	
+	
+			Node child = Node(action , &node , action , box_ );
+			alg.add(child);
+
+
 		}
 	}
+		std::cout<<"Frontier  "<<alg.frontier.size()<<std::endl;
 
-
-
-
-
-
+		std::cout<<std::endl;
+	
 
 
 }

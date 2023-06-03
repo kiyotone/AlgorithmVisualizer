@@ -12,7 +12,7 @@ Node Algorithm::remove(){
         std::cout<<"EMPTY FRONTIER"<<std::endl;
     }
     else{
-        Node node = frontier[-1];
+        Node node = frontier[frontier.size()-1];
         frontier.pop_back();
         return node;
     }
@@ -30,7 +30,7 @@ bool Algorithm::empty(){
 void Algorithm::add(Node node){
 
     frontier.push_back(node);
-
+    
 }
 
 bool Algorithm::contains_state(sf::Vector2i state){
