@@ -10,7 +10,7 @@ Search::Search(){
 void Search::init_solve(){
 
 	Node start( initial_state , box[5][5]);
-	goal_state = sf::Vector2i(10,10);
+	goal_state = sf::Vector2i(4,4);
 	// std::cout<<start.action.x<<' '<<start.action.y<<std::endl;
 	alg.add(start);
 }
@@ -166,14 +166,15 @@ void Search::solve(){
 	if (node.state == goal_state){
 		// search_complete = true;
 		// searching=false;
-		while (node.parent->state != initial_state)
-		{
-			actions.push_back(node.action);
-			
-			Node *node_ = node.parent;
 
-			std::cout<< node_->state.x <<" "<<node_->state.y<<std::endl;
-		}
+		// while (node.parent->state != initial_state)
+		// {
+		// 	actions.push_back(node.action);
+			
+		// 	Node *node_ = node.parent;
+
+		// 	std::cout<< node_->state.x <<" "<<node_->state.y<<std::endl;
+		// }
 		window->close();
 		
 	}
@@ -188,10 +189,11 @@ void Search::solve(){
 	std::cout<<"Explored  "<<alg.explored.size()<<std::endl;
 
 	if(node.state != initial_state){
-		std::cout<<"State  "<<node.state.x<<" "<<node.state.y <<std::endl;	
-		std::cout<<"Parent  "<<node.parent->state.x<<" "<<node.parent->state.y <<std::endl;	
 
-	}
+		std::cout<<"State  "<<node.state.x<<" "<<node.state.y <<std::endl;	
+		std::cout<<"Parent  "<<node.parent->action.x<<" "<<node.parent->action.y <<std::endl;	
+
+	} 
 	
 	std::vector<sf::Vector2i> act =  node.get_actions();
 
@@ -201,25 +203,30 @@ void Search::solve(){
 		
 		if( !alg.contains_state(act[a]) and !alg.inExplored(act[a])){
 			
+			std::cout<<std::endl;
 			std::cout<<"Action  "<< act[a].x <<" " <<act[a].y<<std::endl;
-
+			
 			Box *box_ = box[act[a].x][act[a].y];
 			
-			sf::Vector2i action = act[a];
 			
-	
-	
-			Node child = Node(action , &node , action , box_ );
+			
 
-			std::cout<<child.parent->state.x<<" "<<child.parent->state.x;
 			
-			alg.add(child);
+	
+			Node *child = new Node( sf::Vector2i(act[a].x,act[a].y) , &node , sf::Vector2i(act[a].x,act[a].y) , box_ );
+
+			std::cout<<"CHILD     "<<child->state.x<<" "<<child->state.y<<std::endl;
+			std::cout<<"PARENT    "<< child->parent->state.x<<" "<<child->parent->state.y<<std::endl;
+
+			alg.add(*child);
 
 
 		}
 	}
 		std::cout<<"Frontier  "<<alg.frontier.size()<<std::endl;
 
+		std::cout<<std::endl;
+		std::cout<<std::endl;
 		std::cout<<std::endl;
 	
 }
