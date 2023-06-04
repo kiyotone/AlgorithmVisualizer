@@ -29,4 +29,5 @@ public:
 	float switchTIme = 0.05f;
 	bool animating = false;
 	void centerScale(int scale);
+	void is_path();
 };

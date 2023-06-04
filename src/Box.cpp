@@ -15,6 +15,10 @@ Box::Box(int x, int y, int width = 32, int height = 32) : Entity(x, y, width, he
 
 void Box::animate(float deltime)
 {
+	if (!animating)
+	{
+		return;
+	}
 	totalTime += deltime;
 	// std::cout<<pos.x/32<<"Animating"<<pos.y/32<<std::endl;
 	// std::cout<<totalTime<<" "<<switchTIme<<std::endl;
@@ -41,6 +45,15 @@ void Box::animate(float deltime)
 		totalTime = 0;
 	}
 }
+
+void Box::is_path()
+{
+	this->currentAnimation = 0;
+	this->animating = false;
+	this->rect.setFillColor(sf::Color::Black);
+	this->centerScale(scale[0]);
+}
+
 
 void Box::centerScale(int scale)
 {
