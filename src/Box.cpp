@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include "Box.h"
 
 Box::Box(int x, int y, int width = 32, int height = 32) : Entity(x, y, width, height)
@@ -26,6 +25,7 @@ void Box::animate(float deltime)
 		// std::cout<<totalTime<<"Animating"<<switchTIme<<std::endl;
 
 		//TODO Better Implementation Upcomming
+		//Nub fucker
 
 		if (currentAnimation == 9)
 		{

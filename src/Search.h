@@ -12,9 +12,10 @@ private:
 
 public:
 	Search();
+	~Search();
 
 	sf::RenderWindow* window;
-	Mouse* mouse = new Mouse(0, 0, 2, 2);
+	Mouse* mouse;
 	sf::Vector2i origin = sf::Vector2i(32, 32);
 	std::vector<std::vector<Box*>> box;
 	float deltime;
@@ -30,8 +31,6 @@ public:
 
 	sf::Vector2i initial_state = sf::Vector2i(5, 5);
 
-
-	void init();
 	void init_variables();
 	void init_window();
 	void init_boxes();

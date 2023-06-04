@@ -5,7 +5,7 @@
 class Box : public Entity
 {
 private:
-	sf::Color animColours[10] = {
+	static inline sf::Color animColours[10] = {
 		sf::Color{250, 0, 250},
 		sf::Color{230, 0, 230},
 		sf::Color{210, 0, 210},
@@ -18,7 +18,7 @@ private:
 		sf::Color{250, 0, 250}
 	};
 
-	int scale[10] = {2, 4, 6, 8, 10, 10, 8, 6, 4, 2};
+	static inline int scale[10] = {2, 4, 6, 8, 10, 10, 8, 6, 4, 2};
 
 public:
 	Box(int x, int y, int width, int height);

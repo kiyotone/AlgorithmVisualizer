@@ -4,7 +4,6 @@
 int main()
 {
 	Search search;
-	search.init();
 
 	search.run();
 	

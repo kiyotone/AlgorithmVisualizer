@@ -49,7 +49,6 @@ bool Algorithm::inExplored(sf::Vector2i state)
 		if (state == explored[x])
 		{
 			return true;
-			break;
 		}
 	}
 	return false;

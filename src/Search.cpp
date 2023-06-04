@@ -6,6 +6,11 @@
 
 Search::Search()
 {
+	init_boxes();
+	init_window();
+	init_variables();
+	init_solve();
+	this->mouse = new Mouse(this->box);
 }
 
 void Search::init_solve()
@@ -14,14 +19,6 @@ void Search::init_solve()
 	goal_state = sf::Vector2i(4, 4);
 	// std::cout<<start.action.x<<' '<<start.action.y<<std::endl;
 	alg.add(start);
-}
-
-void Search::init()
-{
-	init_boxes();
-	init_window();
-	init_variables();
-	init_solve();
 }
 
 void Search::init_variables()
@@ -66,7 +63,7 @@ void Search::updateSFMLevents()
 void Search::update()
 {
 	updateSFMLevents();
-	mouse->update(box, *window);
+	mouse->update(*window);
 
 
 	totalTime += deltime;
@@ -169,6 +166,9 @@ void Search::solve()
 
 		// 	std::cout<< node_->state.x <<" "<<node_->state.y<<std::endl;
 		// }
+		this->search_complete = true;
+		this->search_complete = false;
+		std::cout << "found\n";
 		window->close();
 	}
 
@@ -213,3 +213,17 @@ void Search::solve()
 	std::cout << std::endl;
 	std::cout << std::endl;
 }
+
+Search::~Search()
+{
+	delete this->mouse;
+
+	for (auto& rows: this->box)
+	{
+		for (const auto& item: rows)
+		{
+			delete item;
+		}
+	}
+}
+

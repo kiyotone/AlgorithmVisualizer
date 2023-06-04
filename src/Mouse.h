@@ -1,14 +1,18 @@
 #pragma once
 
-#pragma once
-#include "Entity.h"
 #include "Box.h"
 
-class Mouse : public Entity
+class Mouse
 {
 private:
+	Box* get_box(sf::Vector2i pos) const;
+	std::vector<std::vector<Box*>> *boxes_;
+	sf::Vector2i maze_dim_rows_cols_;
+	sf::Vector2i box_dim_;
+	sf::Vector2i box_starting_pos_;
 
 public:
-	Mouse(int x, int y, int width, int height);
-	void update(std::vector<std::vector<Box*>> box, sf::RenderWindow& window);
+	Mouse(std::vector<std::vector<Box*>>& boxes);
+
+	void update(const sf::RenderWindow& window) const;
 };
