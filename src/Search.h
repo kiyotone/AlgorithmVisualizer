@@ -25,9 +25,11 @@ public:
     sf::Vector2i goal_state;
     std::vector<sf::Vector2i> actions;
     float totalTime = .0f;
-    float switchTIme = 3.0f;
+    float switchTIme = .1f;
+    bool searching = false;
+    bool search_complete = false;
 
-    sf::Vector2i initiai_state;
+    sf::Vector2i initial_state =sf::Vector2i(5,5);
     
 
     void init();

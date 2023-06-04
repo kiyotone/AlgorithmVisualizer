@@ -12,8 +12,8 @@ Node Algorithm::remove(){
         std::cout<<"EMPTY FRONTIER"<<std::endl;
     }
     else{
-        Node node = frontier[frontier.size()-1];
-        frontier.pop_back();
+        Node node = frontier[0];
+        frontier.erase(frontier.begin());
         return node;
     }
 

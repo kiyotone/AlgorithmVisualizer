@@ -11,6 +11,7 @@ public:
     std::vector<Node> frontier;
     std::vector<sf::Vector2i> explored;
     
+
     Node remove();
     void add(Node node);
     void contains_state();
