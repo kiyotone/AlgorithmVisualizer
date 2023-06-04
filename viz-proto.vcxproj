@@ -153,15 +153,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Algorithm.cpp" />
     <ClCompile Include="src\Box.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Mouse.cpp" />
+    <ClCompile Include="src\Node.cpp" />
+    <ClCompile Include="src\Search.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Algorithm.h" />
     <ClInclude Include="src\Box.h" />
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Mouse.h" />
+    <ClInclude Include="src\Node.h" />
+    <ClInclude Include="src\Search.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

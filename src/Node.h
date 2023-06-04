@@ -5,23 +5,19 @@
 class Node
 {
 private:
-    /* data */
+	/* data */
 public:
+	Node(sf::Vector2i state, Node* parent, sf::Vector2i action, Box* box);
+	Node(sf::Vector2i state, Box* box);
 
-   
-    Node(sf::Vector2i state, Node* parent, sf::Vector2i action,Box *box);
-    Node(sf::Vector2i state,Box *box);
-        
-    Node* parent;  
+	Node* parent;
 
-    sf::Vector2i state; 
+	sf::Vector2i state;
 
-    sf::Vector2i action;
+	sf::Vector2i action;
 
-    Box *box;
+	Box* box;
 
-    
 
-    std::vector<sf::Vector2i> get_actions();
-
+	std::vector<sf::Vector2i> get_actions();
 };
