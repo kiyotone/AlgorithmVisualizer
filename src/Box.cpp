@@ -34,9 +34,16 @@ void Box::animate(float deltime) {
 
         }
         
-        rect.setFillColor(animColours[currentAnimation]);
+        if(!path){
+            rect.setFillColor(animColours[currentAnimation]);
+            
+        }
+        else{
+            rect.setFillColor(animColoursPath[currentAnimation]);
+        }
         centerScale(scale[currentAnimation]);  
 
+        
         
         currentAnimation++;
         totalTime = 0;

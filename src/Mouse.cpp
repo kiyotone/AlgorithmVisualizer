@@ -10,20 +10,16 @@ Mouse::Mouse(int x, int y, int width, int height) :Entity(x, y, width, height) {
 void Mouse::update(std::vector<std::vector<Box*>> box, sf::RenderWindow& window)
 {
     pos = sf::Mouse::getPosition(window);
+    // std::cout<<pos.x<<" "<<pos.y<<std::endl;
+    
+    int mouse_x = (int)(pos.x-32)/16;
+    int mouse_y = (int)(pos.y-32)/16;
+    
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-        for (int i = 0; i < box.size(); i++) {
-
-            for (int j = 0; j < box[0].size(); j++) {
-
-                if (box[i][j]->entity_over(pos)) {
-                    box[i][j]->animating = true;
-
-
-
-                }
-            }
-
-        }
-
+                    
+                    box[this->selected.x][this->selected.y]->rect.setFillColor(sf::Color::Green);    
+                    
+                    this->selected = sf::Vector2i(mouse_x,mouse_y);
+                    box[this->selected.x][this->selected.y]->rect.setFillColor(sf::Color::Red);
     }
 }

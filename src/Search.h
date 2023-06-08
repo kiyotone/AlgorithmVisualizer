@@ -4,6 +4,7 @@
 #include "Node.h"
 #include "Algorithm.h"
 
+
 class Search
 {
 private:
@@ -25,8 +26,9 @@ public:
     sf::Vector2i goal_state;
     std::vector<sf::Vector2i> actions;
     float totalTime = .0f;
-    float switchTIme = .1f;
+    float switchTIme = .04f;
     bool searching = false;
+    bool makeFront = true;
     bool search_complete = false;
 
     sf::Vector2i initial_state =sf::Vector2i(5,5);

@@ -10,9 +10,10 @@ Search::Search(){
 void Search::init_solve(){
 
 	Node start( initial_state , box[5][5]);
-	goal_state = sf::Vector2i(4,4);
+	goal_state = sf::Vector2i(10,4);
 	// std::cout<<start.action.x<<' '<<start.action.y<<std::endl;
-	alg.add(start);
+	start.box->rect.setFillColor(sf::Color::Red);
+	alg.add(&start);
 }
 
 void Search::init(){
@@ -35,7 +36,7 @@ void Search::init_boxes(){
 		std::vector<Box*> temp_box;
 		for (int y = 0; y < 40; y++)
 		{
-			temp_box.push_back(new Box(origin.x + (x * 32), origin.y + (y * 32), 32, 32));
+			temp_box.push_back(new Box(origin.x + (x * 16), origin.y + (y * 16), 16, 16));
 		}
 		box.push_back(temp_box);
 	}
@@ -93,8 +94,11 @@ void Search::update_boxes(){
 			for (int y = 0; y < 40; y++)
 			{
 				if (box[x][y]->animating)
+
 				{
+				
 					box[x][y]->animate(deltime);
+					
 				}
 			}
 		}
@@ -130,7 +134,7 @@ void Search::draw(){
 
 void Search::init_window(){
     sf::VideoMode mode = sf::VideoMode::getDesktopMode();
-	this->window =  new sf::RenderWindow(mode, "SFML works!");
+	this->window =  new sf::RenderWindow(mode, "SFML works!",sf::Style::Fullscreen);
 }
 
 void Search::run(){
@@ -159,43 +163,50 @@ void Search::solve(){
 		window->close();
 	}
 	
-	Node node = alg.remove();
+	Node *node = alg.remove();
 	
 	
 
-	if (node.state == goal_state){
-		// search_complete = true;
-		// searching=false;
+	if (node->state == goal_state){
+		node->box->rect.setFillColor(sf::Color::Red);
 
-		// while (node.parent->state != initial_state)
-		// {
-		// 	actions.push_back(node.action);
+		while (node->parent->state != initial_state)
+		{
+			actions.push_back(node->action);
+			std::cout<< node->state.x <<" "<<node->state.y<<std::endl;
+			node = node->parent;
+			node->box->animating=true;
+			node->box->path=true;
+
 			
-		// 	Node *node_ = node.parent;
-
-		// 	std::cout<< node_->state.x <<" "<<node_->state.y<<std::endl;
-		// }
-		window->close();
+		}
+			std::cout<< actions.size()<<std::endl;
 		
+		this->searching = false;
+		// window->close();
+
 	}
 	
+	if (this->searching){
+
+		
+	node->box->animating= true;
+
+	alg.explored.push_back(node->state);
 	
 
-	node.box->animating= true;
+      
 
-	alg.explored.push_back(node.state);
+	// if(node->state != initial_state){
+
+	// 	std::cout<<"State  "<<node->state.x<<" "<<node->state.y <<std::endl;	
+	// 	std::cout<<"Child  "<<node->state.x<<" "<<node->state.y <<std::endl;	
+    //     std::cout<<"Parent  "<<node->parent->state.x<<" "<<node->parent->state.y <<std::endl;	
+    	
+
+	// } 
 	
-
-	std::cout<<"Explored  "<<alg.explored.size()<<std::endl;
-
-	if(node.state != initial_state){
-
-		std::cout<<"State  "<<node.state.x<<" "<<node.state.y <<std::endl;	
-		std::cout<<"Parent  "<<node.parent->action.x<<" "<<node.parent->action.y <<std::endl;	
-
-	} 
-	
-	std::vector<sf::Vector2i> act =  node.get_actions();
+	std::vector<sf::Vector2i> act = node->get_actions();
 
 
 
@@ -207,18 +218,10 @@ void Search::solve(){
 			std::cout<<"Action  "<< act[a].x <<" " <<act[a].y<<std::endl;
 			
 			Box *box_ = box[act[a].x][act[a].y];
-			
-			
-			
-
-			
 	
-			Node *child = new Node( sf::Vector2i(act[a].x,act[a].y) , &node , sf::Vector2i(act[a].x,act[a].y) , box_ );
+			Node *child = new Node( sf::Vector2i(act[a].x,act[a].y) , node , sf::Vector2i(act[a].x,act[a].y) , box_ );
 
-			std::cout<<"CHILD     "<<child->state.x<<" "<<child->state.y<<std::endl;
-			std::cout<<"PARENT    "<< child->parent->state.x<<" "<<child->parent->state.y<<std::endl;
-
-			alg.add(*child);
+			alg.add(child);
 
 
 		}
@@ -229,4 +232,6 @@ void Search::solve(){
 		std::cout<<std::endl;
 		std::cout<<std::endl;
 	
+	}
+
 }

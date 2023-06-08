@@ -4,11 +4,13 @@
 #include <iostream>
 
 
-Node::Node(sf::Vector2i state, Node* parent, sf::Vector2i action , Box *box){
+
+Node::Node(sf::Vector2i state,Node *parent, sf::Vector2i action , Box *box){
         this->parent = parent;
         this->action = action;
         this->box = box;
         this->state = state;
+        
         
 }
 
@@ -19,6 +21,10 @@ Node::Node(sf::Vector2i state,Box *box){
 }
 
 std::vector<sf::Vector2i> Node::get_actions(){
+        // if(parent->state.x){
+        //         std::cout<<"p"<<parent->state.x;
+        
+        // }
         std::vector<sf::Vector2i> actions;
         std::vector<sf::Vector2i> dels = {
                 sf::Vector2i(0,1),

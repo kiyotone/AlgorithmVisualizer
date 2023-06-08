@@ -16,6 +16,17 @@ private:
                       sf::Color{ 230, 0, 230 },
                       sf::Color{ 250, 0, 250 }    
     };
+    sf::Color animColoursPath[10] = {sf::Color{ 250 , 250 , 0 },
+                      sf::Color{ 230 , 230 , 0 },
+                      sf::Color{ 210 , 210 , 0 },
+                      sf::Color{ 190 , 190 , 0 },
+                      sf::Color{ 170 , 170 , 0 } ,
+                      sf::Color{ 170 , 170 , 0 } ,
+                      sf::Color{ 190 , 190 , 0 },
+                      sf::Color{ 210 , 210 , 0 },
+                      sf::Color{ 230 , 230 , 0 },
+                      sf::Color{ 250 , 250 , 0 }    
+    };
 
     int scale[10]= {2,4,6,8,10,10,8,6,4,2};
 
@@ -29,6 +40,7 @@ public:
     float switchTIme = 0.05f;
     bool animating = false;
     void centerScale(int scale);
+    bool path;
 
 
 };

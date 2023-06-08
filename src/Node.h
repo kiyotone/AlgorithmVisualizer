@@ -9,10 +9,10 @@ private:
 public:
 
    
-    Node(sf::Vector2i state, Node* parent, sf::Vector2i action,Box *box);
+    Node(sf::Vector2i state,  Node *parent, sf::Vector2i action,Box *box);
     Node(sf::Vector2i state,Box *box);
         
-    Node* parent;  
+    Node *parent;
 
     sf::Vector2i state; 
 
